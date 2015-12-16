@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :add_star]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def add_star
     @user = set_user

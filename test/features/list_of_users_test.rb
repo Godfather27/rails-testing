@@ -35,9 +35,9 @@ class ListOfUsersTest < Capybara::Rails::TestCase
 
   test "user#show star+1 button exists" do
     visit user_path(users(:one).id)
-    assert_button('add_star')
+    assert_button('Add star')
     assert users(:one).no_stars == 0
-    click_button('add_star')
+    click_button('Add star')
     assert_content page, 'Users'
     assert users(:one).no_stars == 1
   end
