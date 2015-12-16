@@ -19,6 +19,7 @@
   <strong>No stars:</strong>
   <%= @user.no_stars %>
 </p>
+<%= button_to 'Add a star', :action => 'add_star' , remote: true %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

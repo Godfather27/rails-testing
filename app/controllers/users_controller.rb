@@ -1,5 +1,20 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :add_star]
+
+  def add_star
+    @user = set_user
+    @user.no_stars += 1
+    respond_to do |format|
+      if @user.save
+        format.html {redirect_to @user, notice: "There was added a star!"}
+        format.json {render :show, status: :ok, location: @user}
+      else
+        format.html {render :edit}
+        format.json {render json: @user.errors, status: :unprocessable_entity}
+      end
+  end
+  end
+
 
   # GET /users
   # GET /users.json
