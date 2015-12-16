@@ -16,4 +16,30 @@ class ListOfUsersTest < Capybara::Rails::TestCase
     assert_button page, "load info"
   end
 
+  test "user#new page user can be created" do
+    visit new_user_path
+    fill_in 'user_first_name', :with => 'Fronz'
+    fill_in 'user_middle_initial', :with => 'Günther'
+    fill_in 'user_last_name', :with => 'Herbert'
+    click_button('Create User')
+    assert_content page, 'Fronz'
+  end
+
+  test "user#new page user can't be created" do
+    visit new_user_path
+    fill_in 'user_first_name', :with => 'Fronz'
+    fill_in 'user_last_name', :with => 'Herbert'
+    click_button('Create User')
+    refute_content page, 'Fronz'
+  end
+
+  test "user#show star+1 button exists" do
+    visit user_path(users(:one).id)
+    assert_button('add_star')
+    assert users(:one).no_stars == 0
+    click_button('add_star')
+    assert_content page, 'Users'
+    assert users(:one).no_stars == 1
+  end
+
 end
